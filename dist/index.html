@@ -14,7 +14,9 @@
         
     </div>
     <div class="col-12 m-2 text-center "> 
-        <button class="btn btn-success" onClick="window.location.reload();"> Renitialiser</button> 
+        <button class="btn btn-warning" id="charger">Charger</button>
+        <button class="btn btn-danger" onClick="window.location.reload();"> Renitialiser</button>
+       
     </div>
     <divr class="row">
         <div class="col-6 border text-center" >
@@ -59,7 +61,7 @@
     
                 <div class="form-inline p-3">
                     <label for="L" class="p-2">L= </label>
-                    <input type="text" disabled class="form-control col-10" placeholder="" id="libelisation">
+                    <input type="text" disabled class="form-control col-10" placeholder="" id="libelisation"> 
                 </div>
     
                 <div  class="form-inline pl-3 pr-3">
@@ -83,6 +85,7 @@
                 <hr>
                 <button class="btn btn-primary m-2" id="valider_ks"> Valider</button>
             </div>
+            <button hidden class="btn btn-success" id="sauvegarder">Sauvegarder</button>
             
         </div>
 
@@ -100,16 +103,20 @@
                         <option value="1"> φ = p</option>
                         <option value="2"> φ = ¬ ψ </option>
                         <option value="3">φ = ψ1 ∧ ψ2</option>
-                        <option value="4"></option>
+                        <option value="4">φ = EX  ψ</option>
+                        <option value="5">φ = Eψ1 Uψ2</option>
+                        <option value="6">φ = Aψ1 Uψ2</option>
                     </select>
                 </div>
                 <div id="formule_choisie">
 
                 </div>
-                <!-- <div  class="form-inline p-3" id="case1">
-                    <label for="p"><strong>φ =</strong></label>
-                    <input type="text" class="form-control col-2" placeholder="propriété" id="p1">
+                 <!--
+                 <div  class="form-inline p-3" id="case4">
+                    <label for="p"><strong>φ = EX</strong></label>
+                    <input type="text" class="form-control col-2" placeholder="propriété" id="p3">
                 </div>
+               
                 <div  class="form-inline p-3" id="case2">
                     <label for="p2"><strong>φ = ¬ </strong></label>
                     <input type="text" class="form-control col-2 ml-1" placeholder="propriété" id="p2">
@@ -124,8 +131,9 @@
                 <hr>
                 <button disabled class="btn btn-success m-3" id="check_ctl">Check ! </button>
                 <hr>
-                <h6 id="reponse"></h6>
                 <h6 id="marquage"></h6>
+                <h6 id="reponse"></h6>
+                
             </div>
             
         </div>
