@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> CTL model checker</title>
+</head>
+
+<body>
+    <div class="jumbotron  m-0 text-center bg-info">
+        <h1>C-T-L Model Checker</h1>
+        <p>By ZAK!</p>
+        
+    </div>
+    <div class="col-12 m-2 text-center "> 
+        <button class="btn btn-success" onClick="window.location.reload();"> Renitialiser</button> 
+    </div>
+    <divr class="row">
+        <div class="col-6 border text-center" >
+            <h5>Structure de Kripke</h5>
+            <hr>
+            
+            <div  id="ks_bloc">
+                <p>veuillez tout d'abord saisir les champs qui permettent de définir une Strucutre de Kripke :</p>
+                <div class="form-inline p-3">
+                    <label for="etats" class="p-2">S= {</label>
+                    <input type="text" disabled class="form-control col-8" placeholder="etat1 , etat2 , etat3 , ..."
+                        id="etats">
+                    <label for="etats" class="p-2">}</label>
+                </div>
+    
+                <form action="" class="form-inline pl-3 pr-3" id="nouvelEtat">
+                    <label for="etat" class="p-2">Tapez un nouvel Etat</label>
+                    <input type="text" class="form-control col-2" required placeholder="nouvel etat" id="etat" pattern="^[a-zA-Z0-9àéèç]{1,8}$" title="1 à 8 caractères sans espaces">
+                    <button type="submit" class="btn btn-primary ml-1"> +</button>
+                </form><br>
+    
+                <div class="form-inline p-3">
+                    <label for="transitions" class="p-2">R= {</label>
+                    <input type="text" class="form-control col-10" disabled
+                        placeholder="(etatDepart1 , etatArrivee1) , (etatDepart2 , etatArrivee2) ..." id="transitions">
+                    <label for="transitions" class="p-2">}</label>
+                </div>
+    
+                <form action="" class="form-inline pl-3 pr-3" id="nouvelleTransition">
+                    <label for="transitions" class="p-2">Tapez une nouvelle Transition: (</label>
+                    <input type="text" class="form-control col-2" required placeholder="etat depart" id="etatDepart" pattern="^[a-zA-Z0-9àéèç]{1,8}$" title="1 à 8 caractères sans espaces">
+                    <label for="" class="pl-1 pr-1">,</label>
+                    <input type="text" class="form-control col-2" required placeholder=" arrivee" id="etatArrivee"pattern="^[a-zA-Z0-9àéèç]{1,8}$" title="1 à 8 caractères sans espaces">
+                    <label for="" class=" pl-2 pr-2">)</label>
+                    <button type="submit" class="btn btn-primary"> +</button>
+                </form>
+    
+                <div class="form-inline p-3"  >
+                    <label for="q0" class="p-2">q0= </label>
+                    <input type="text" class="form-control col-10" placeholder=" etat initial" id="etatInitial">
+                </div>
+    
+                <div class="form-inline p-3">
+                    <label for="L" class="p-2">L= </label>
+                    <input type="text" disabled class="form-control col-10" placeholder="" id="libelisation">
+                </div>
+    
+                <div  class="form-inline pl-3 pr-3">
+                    <div class="form-inline border p-1">
+                        <label for="s" class="p-2">Tapez une nouvelle Libélisation L(</label>
+                        <input type="text" class="form-control col-2" placeholder=" etat " id="etatL">
+                        <label for="" class="pl-1 pr-1" >) = {</label>
+                        <label for="" class="pl-1 pr-1" id="listeProp"> </label>
+                        <label for="" class=" pl-2 pr-2">}</label>
+                        <div class="input-group m-1">
+                            <input type="text" class="form-control col-8 ml-1" placeholder="propriété vraie" id="propVraie">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-warning" type="button" id="ajoutProp">+</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <button type="button" class="btn btn-primary  ml-1" id="ajouterLib"> +</button>
+    
+                </div>
+                <hr>
+                <button class="btn btn-primary m-2" id="valider_ks"> Valider</button>
+            </div>
+            
+        </div>
+
+        <div  class="col-6 border text-center " >
+            <h5>Formule CTL</h5>
+            <hr>
+            <p id="msg">veuillez tout d'abord saisir les champs qui permettent de définir une Strucutre de Kripke :</p>
+            <div hidden  id="ctl_block">
+                <p>Veuillez maintenant saisir une formule CTL, afin de vérifier sa satisfaction par la Structure de Kripke</p><br>
+
+                <div class="form-inline p-3"  >
+                    <label for="type_formule" class="p-2"> Selectioner le type de la formule </label>
+                    <select  class="form-control col-6"  id="type_formule">
+                        <option hidden selected disabled value="0"> φ = ?</option>
+                        <option value="1"> φ = p</option>
+                        <option value="2"> φ = ¬ ψ </option>
+                        <option value="3">φ = ψ1 ∧ ψ2</option>
+                        <option value="4"></option>
+                    </select>
+                </div>
+                <div id="formule_choisie">
+
+                </div>
+                <!-- <div  class="form-inline p-3" id="case1">
+                    <label for="p"><strong>φ =</strong></label>
+                    <input type="text" class="form-control col-2" placeholder="propriété" id="p1">
+                </div>
+                <div  class="form-inline p-3" id="case2">
+                    <label for="p2"><strong>φ = ¬ </strong></label>
+                    <input type="text" class="form-control col-2 ml-1" placeholder="propriété" id="p2">
+                </div>
+                <div  class="form-inline p-3" id="case3">
+                    <label for="p2"><strong>φ =  </strong></label>
+                    <input type="text" class="form-control col-2 mr-1" placeholder="propriété" id="pp1">
+                    <label for="p2"><strong>  ∧  </strong></label>
+                    <input type="text" class="form-control col-2 ml-1" placeholder="propriété" id="pp2">
+                </div> -->
+
+                <hr>
+                <button disabled class="btn btn-success m-3" id="check_ctl">Check ! </button>
+                <hr>
+                <h6 id="reponse"></h6>
+                <h6 id="marquage"></h6>
+            </div>
+            
+        </div>
+
+    </div>
+</body>
+<script src="./js/index.js" ></script>
+
+</html>
